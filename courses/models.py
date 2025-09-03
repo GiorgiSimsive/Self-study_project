@@ -1,11 +1,11 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 User = settings.AUTH_USER_MODEL
 
 
 class Course(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='courses')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="courses")
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
@@ -14,7 +14,7 @@ class Course(models.Model):
 
 
 class Section(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="sections")
     title = models.CharField(max_length=255)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Section(models.Model):
 
 
 class Material(models.Model):
-    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='materials')
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name="materials")
     title = models.CharField(max_length=255)
     content = models.TextField()
 
@@ -31,7 +31,7 @@ class Material(models.Model):
 
 
 class Test(models.Model):
-    material = models.ForeignKey(Material, on_delete=models.CASCADE, related_name='tests')
+    material = models.ForeignKey(Material, on_delete=models.CASCADE, related_name="tests")
     title = models.CharField(max_length=255)
 
     def __str__(self):
@@ -39,7 +39,7 @@ class Test(models.Model):
 
 
 class Question(models.Model):
-    test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name='questions')
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name="questions")
     text = models.CharField(max_length=255)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="answers")
     text = models.CharField(max_length=255)
     is_correct = models.BooleanField(default=False)
 
