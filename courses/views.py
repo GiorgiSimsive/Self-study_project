@@ -29,7 +29,7 @@ from .serializers import (
     destroy=extend_schema(tags=["courses"], summary="Удалить курс"),
 )
 class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().order_by("id")
     serializer_class = CourseSerializer
     permission_classes = [ReadOnlyOrTeacherAdmin, IsOwnerOrReadOnly]
 
@@ -40,13 +40,13 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 class SectionViewSet(viewsets.ModelViewSet):
-    queryset = Section.objects.all()
+    queryset = Section.objects.all().order_by("id")
     serializer_class = SectionSerializer
     permission_classes = [ReadOnlyOrTeacherAdmin, IsOwnerOrReadOnly]
 
 
 class MaterialViewSet(viewsets.ModelViewSet):
-    queryset = Material.objects.all()
+    queryset = Material.objects.all().order_by("id")
     serializer_class = MaterialSerializer
     permission_classes = [ReadOnlyOrTeacherAdmin, IsOwnerOrReadOnly]
 
@@ -56,7 +56,7 @@ class MaterialViewSet(viewsets.ModelViewSet):
 
 
 class TestViewSet(viewsets.ModelViewSet):
-    queryset = Test.objects.all()
+    queryset = Test.objects.all().order_by("id")
     serializer_class = TestSerializer
     permission_classes = [ReadOnlyOrTeacherAdmin, IsOwnerOrReadOnly]
 
@@ -129,12 +129,12 @@ class TestViewSet(viewsets.ModelViewSet):
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
+    queryset = Question.objects.all().order_by("id")
     serializer_class = QuestionSerializer
     permission_classes = [ReadOnlyOrTeacherAdmin, IsOwnerOrReadOnly]
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
-    queryset = Answer.objects.all()
+    queryset = Answer.objects.all().order_by("id")
     serializer_class = AnswerSerializer
     permission_classes = [ReadOnlyOrTeacherAdmin, IsOwnerOrReadOnly]
